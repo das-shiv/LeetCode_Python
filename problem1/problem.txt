@@ -1,0 +1,65 @@
+Problem:
+----------
+You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, 
+starting with word1. If a string is longer than the other, append the additional letters onto the end of the
+merged string.
+
+Return the merged string.
+
+Solution explained:
+-------------------
+
+1. create a class named Solution.
+
+2. create a method inside Solution class
+
+        def mergeAlternately(self, word1, word2):
+> this method takes two arguments word1 and word2
+
+3. create an empty list to store the merged letters.
+    merged_chars = []
+
+4. Find out the shortest word
+     min_len = min(len(word1), len(word2))
+    
+> this will set the value of min_len to the length of word1 if word1 is shortest word else to word2 if the length of word2 is shortest.
+ e.g. if word1 = "hello" and word2 = "hi" then min_len = 2 (the length of hi)
+
+
+5. we need to iterate over the 2 words till the length of shortest word i.e. till the value of min_len,
+    and store alternate index items in merged_chars list.
+
+    for i in range(min_len):
+            # Add the character from word1
+            merged_chars.append(word1[i])
+            # Add the character from word2
+            merged_chars.append(word2[i])
+
+6. now we need to append the remaining letters of the longest word at the end of merged_chars.
+    if word1 is longer than word2 then, we can extract word1[min_len:] and append the value to merged_chars by extending the list merged_chars.
+    similarly if word2 is longer then, we can use word2[min_len:] and add the sliced portion to merged_chars list.
+
+
+    # Check if word1 is longer than word2
+        if len(word1) > len(word2):
+            # Append the remaining characters of word1 to the merged list
+            merged_chars.extend(word1[min_len:])
+        # Check if word2 is longer than word1
+        elif len(word2) > len(word1):
+            # Append the remaining characters of word2 to the merged list
+            merged_chars.extend(word2[min_len:])
+
+
+7. now we need to form a word with the items from merged_chars.
+
+ # Join the merged characters into a string and return the result
+        result = ''.join(merged_chars)
+        return result
+
+8. we can create an instance of the Solution class. and call the mergeAlternately function by passing two string arguments.
+
+solution_instance = Solution()
+param_1 = "abc"
+param_2 = "defgh"
+ret = solution_instance.mergeAlternately(param_1, param_2)
+print(ret)
