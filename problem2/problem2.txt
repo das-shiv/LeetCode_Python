@@ -1,0 +1,58 @@
+Problem2:   Greatest Common Divisor of Strings
+-----------------------------------------------
+For two strings s and t, we say "t divides s" if and only if s = t + ... + t (i.e., t is concatenated with itself one or more times).
+Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.
+ 
+
+Example 1:
+
+Input: str1 = "ABCABC", str2 = "ABC"
+Output: "ABC"
+
+Example 3:
+
+Input: str1 = "LEET", str2 = "CODE"
+Output: ""
+
+Constraints:
+
+    1 <= str1.length, str2.length <= 1000
+    str1 and str2 consist of English uppercase letters.
+
+
+--------------------------------------------------------------------------------
+
+Solution Explained:
+--------------------
+1. If there is a string "x" that divides both str1 and str2, it means if we keep multiplying "x" with itself then at one point we will
+    get str1 and str2.
+    e.g. if str1 = hihihi and x = hi, then we get str1 after multiplying x 3 times.
+
+2. if 2 string share a common "x" divider then str1 + str2 must be equal to str2 + str1.
+
+3. the Solution class has a gcdOfStrings(self, str1, str2)  method, it takes str1 and str2 as argument.
+
+4.  we check if str1 + str2 != str2 + str1:
+            return "" #return and empty string if they are not equal.
+
+5. we find the common length string that repeats within both string using the common_length = gcd(len(str1), len(str2)) function.
+
+6. the def gcd(a,b)  method takes length of str1 and str2 as a and b respectively, and finds the gcd of a ,b i.e. the length of the 
+    common string, using euclidean theorem.
+
+    def gcd(a, b):
+            while b:                    # while b value is not equal to 0
+                a, b = b, a % b         # set a value equal to b, and b value equal to the reminder of a%b.     
+            return a                    # when a%b becomes 0, the value of a is the gcd of a and b.
+
+
+7. return str1[:common_length] returns the common string 
+
+
+8. # Example usage:
+solution = Solution()       # create an instance of Solution class
+str1 = "ABCABC"             # value of str1 is set to ABCABC
+str2 = "ABC"                # value of str2 is set to ABC
+result = solution.gcdOfStrings(str1, str2)  #calling the gcdOfStrings function in Solution class
+print(result)                # print the result.
+
